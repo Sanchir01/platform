@@ -23,16 +23,17 @@ model User {
   phone      String   @unique
   avatarPath String
   isAdmin    Boolean  @map("is_admin")
-  orders     Course[]
+
+  Course Course[]
 }
 
 model Course {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  password  String
-  email     String   @unique
-  images    String
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  images      String[]
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      Int?
 }

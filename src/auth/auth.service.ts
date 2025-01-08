@@ -33,6 +33,16 @@ export class AuthService {
 		return { ...tokens, user: this.returnUserFields(oldUserPhone) }
 	}
 
+	async getNewTokens(refreshToken: string) {
+		const token = await this.jwt.verifyAsync(refreshToken)
+		if (!token) {
+			throw new UnauthorizedException('вы не авторизированы')
+		}
+		const user = await this.prisma.user.findUnique({ where: { id: token.id } })
+		const tokens = await this.issueTokens(user)
+		return { ...tokens, user: this.returnUserFields(user) }
+	}
+
 	async register(dto: RegisterDto) {
 		const existUser = await this.prisma.user.findUnique({
 			where: { email: dto.email }
