@@ -32,7 +32,6 @@ model Course {
   updatedAt DateTime @updatedAt @map("updated_at")
   password  String
   email     String   @unique
-  phone     String
   images    String
   User      User?    @relation(fields: [userId], references: [id])
   userId    Int?
