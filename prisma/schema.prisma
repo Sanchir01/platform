@@ -23,8 +23,18 @@ model User {
   phone      String   @unique
   avatarPath String
   isAdmin    Boolean  @map("is_admin")
+  Course     Course[]
+}
 
-  Course Course[]
+model Plans {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  price       Int
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  Feature     Feature[]
+  images      String[]
 }
 
 model Course {
@@ -34,6 +44,35 @@ model Course {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
   images      String[]
+  duration    Int      @default(1)
   User        User?    @relation(fields: [userId], references: [id])
   userId      Int?
+}
+
+model SubCourse {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+}
+
+model Lessons {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  duration    Int
+}
+
+model Feature {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  Plans   Plans? @relation(fields: [plansId], references: [id])
+  plansId Int?
 }
