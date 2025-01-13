@@ -9,7 +9,7 @@ import {
 import { AuthService } from './auth.service'
 import { LoginDto } from './dto/login.dto'
 import { RegisterDto } from './dto/register.dto'
-import { RefreshTokenDTO } from './dto/tokens.dto'
+import { RefreshTokenDto } from './dto/tokens.dto'
 import { ApiBearerAuth } from '@nestjs/swagger'
 
 @Controller('auth')
@@ -27,7 +27,7 @@ export class AuthController {
 	@Post('login/new-tokens')
 	@HttpCode(201)
 	@UsePipes(new ValidationPipe())
-	async newTokens(@Body() dto: RefreshTokenDTO) {
+	async newTokens(@Body() dto: RefreshTokenDto) {
 		return this.authService.getNewTokens(dto.refreshToken)
 	}
 	@Post('registration')
