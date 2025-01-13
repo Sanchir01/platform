@@ -1,8 +1,8 @@
 import { IsNumber, IsOptional, Min } from 'class-validator'
 
-export class SubCourseFilterDTO {
+export class FiltersLessonsDto {
 	@IsNumber()
-	@Min(1)
 	@IsOptional()
-	courseId: number
+	@Min(1)
+	subCourseId: number
 }

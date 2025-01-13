@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { ForbiddenException, Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 
 @Injectable()
@@ -10,6 +10,12 @@ export class courseService {
 	}
 
 	async oneCourse(id: number) {
-		return this.prisma.course.findUnique({ where: { id } })
+		const oneCourse = this.prisma.course.findUnique({ where: { id } })
+
+		if (!!oneCourse) {
+			throw new ForbiddenException('курс с таким айди не существует')
+		}
+
+		return oneCourse
 	}
 }

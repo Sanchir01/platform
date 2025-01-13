@@ -1,7 +1,12 @@
-import { Controller } from '@nestjs/common';
-import { FeatureService } from './feature.service';
+import { Controller, Get } from '@nestjs/common'
+import { FeatureService } from './feature.service'
 
 @Controller('feature')
 export class FeatureController {
-  constructor(private readonly featureService: FeatureService) {}
+	constructor(private readonly featureService: FeatureService) {}
+
+	@Get()
+	async allFeatures() {
+		return this.featureService.getAllFeatures()
+	}
 }
