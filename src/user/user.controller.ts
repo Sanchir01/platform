@@ -2,11 +2,13 @@ import { Controller, Get, HttpCode } from '@nestjs/common'
 import { UserService } from './user.service'
 import { Auth } from 'src/auth/decorators/auth.decorators'
 import { CurrentUser } from 'src/auth/decorators/user.devorators'
+import { ApiBearerAuth } from '@nestjs/swagger'
 
 @Controller('profile')
 export class UserController {
 	constructor(private readonly userService: UserService) {}
 
+	@ApiBearerAuth()
 	@Get()
 	@HttpCode(200)
 	@Auth()
