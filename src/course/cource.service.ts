@@ -15,7 +15,6 @@ export class courseService {
 		if (!!oneCourse) {
 			throw new ForbiddenException('курс с таким айди не существует')
 		}
-
 		return oneCourse
 	}
 }
