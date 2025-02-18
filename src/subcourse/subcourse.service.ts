@@ -7,7 +7,7 @@ export class SubcourseService {
 
 	async getAllSubCourse(courseId: number) {
 		return this.prisma.subCourse.findMany({
-			where: { Course: { id: courseId } }
+			where: courseId ? { Course: { id: courseId } } : {}
 		})
 	}
 }
