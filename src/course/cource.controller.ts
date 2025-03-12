@@ -11,7 +11,8 @@ export class CourceController {
 	}
 
 	@Get(':id')
-	async getOneCourse(@Param('courseId') courseId: string) {
-		return this.courseService.oneCourse(+courseId)
+	async getOneCourse(@Param('id') id: string) {
+		console.log('this couirse id', id)
+		return this.courseService.oneCourse(+id)
 	}
 }

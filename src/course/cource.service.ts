@@ -10,9 +10,9 @@ export class courseService {
 	}
 
 	async oneCourse(id: number) {
-		const oneCourse = this.prisma.course.findUnique({ where: { id } })
-
-		if (!!oneCourse) {
+		console.log('one course id', id)
+		const oneCourse = this.prisma.course.findUnique({ where: { id: id } })
+		if (!oneCourse) {
 			throw new ForbiddenException('курс с таким айди не существует')
 		}
 		return oneCourse
